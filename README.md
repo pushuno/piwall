@@ -1,4 +1,3 @@
-# piwall
 Armado de un Wall de Video con Raspberry Pi
 
 El objetivo de este documento es compartir mi experiencia armando un wall de video con Piwall y Raspberry's con el fin de ahorrar tiempo a quienes quieran probarlo, hablaré sobre los inconvenientes que tuve durante su armado y sus soluciones, las ventajas y limitaciones.
@@ -8,16 +7,19 @@ TODO EL SOFTWARE UTILIZADO ES LIBRE y GRATUITO
 
 Empezamos?
 
-# Entorno
+### Entorno
+---
 Armar un Wall de Video siempre me llamó la atención como a varios supongo, cada día que pasa las pantallas son mas grandes y con bordes mas finos lo que hace mas interesante el asunto. 
 Se necesitará una Raspberry Pi por cada pantalla que querramos agregar al Wall, en este caso yo utilicé dos pantallas FullHD de 32" Samsung.
 
-# Ventajas
+### Ventajas
+---
 - Menos cables
 En el pasado la única forma de hacer un wall de video era con costosos splitters y muchos cables. 
 Los unicos cables que necesitaremos son por cada raspberry 
 
-# Limitaciones
+### Limitaciones
+---
 - La conexión mediante wifi por más que utilicemos redes AC no es viable.
 Realicé varias pruebas y utilizando UDP como vamos a usar se pierden paquetes y se ven franjas verdes
 - Pwomxplayer no es muy claro con los mensajes de error
@@ -26,7 +28,8 @@ ante un error crea un log que no da mucha información que ayude a solucionar el
 - No es posible utilizar pantallas en ángulos no rectos, con esto me refiero a que se pueden colocar las pantallas giradas pero siempre verticales u horizontales. No encontré configuración posible para colocarlas a 45º como era mi idea en un principio, para esto la única alternativa es utilizar un software pago (No son baratos y son por suscripción por lo menos para lo que yo pretendía hacer). Si te interesa esto podés buscar por acá www.info-beamer.com
 
 
-# Requisitos
+### Requisitos
+---
 - Una Raspberry Pi por cada pantalla que querramos agregar al wall.
 En mi caso utilicé una Raspberry Pi 3 Model B y una Raspberry Pi 4 Model B de 2GB de Ram, tengo entendido que se puede también con un modelo de Pi Zero pero no lo probé.
 Puede utilizarse una pc con Linux o MacOs además para procesar el video o puede ser controlado por una Raspberry. Dependiendo de el tipo de video que se quiera mostrar.
@@ -39,7 +42,8 @@ Se puede usar cualquier pantalla que tenga HDMI o las pantallas chiquitas que ve
 Memorias de al menos 16GB Clase 10 Micro SD para las Raspis
 
 
-# Configurando los Clientes
+### Configurando los Clientes
+---
 - Descargar Raspbian
 Lo primero es descargar la imágen de Raspbian que es una versión de Debian adaptada para Raspberry.
 Se puede descargar la versión con interfaz gráfica o sin interfaz gráfica, yo utilicé con interfaz ya que la idea mia es que cuando no esté reproduciendo video utilizarlas como un cuadro donde el fondo de pantalla muestre una imagen partida. Para el Wall puede utilizarse cualquiera de las dos versiones, eso si debe ser la última disponible. A la fecha la última es "Raspbian Buster" y se puede descargar de acá https://www.raspberrypi.org/downloads/raspbian/
@@ -155,7 +159,8 @@ Si tira error probar ejecutando lo siguiente
 Sudo apt-get upgrade
 Sudo rpi-update
 
-# Configuración del Servidor
+### Configuración del Servidor
+---
 si el servidor también es cliente ejecutar lo anterior también.
 
 - Instalamos ffmpeg o avconv
@@ -193,7 +198,8 @@ ifconfig
 
 - Copiamos en /home/pi el archuvo .piwall que generamos para los clientes que debe ser igual para todos
 
-# Primeras Pruebas
+### Primeras Pruebas
+---
 
 - En el/los clientes ejecutamos
 
@@ -220,6 +226,13 @@ ffmpeg -i 1080.mpg -an -f h264 udp://239.0.1.23:1234
 -f establece el output y formato h264 (para que sea liviano) y salimos por broadcast udp (Esta dirección y puerto es siempre igual)
 -an establece no enviar audio, si lo sacamos envia audio a todos los clientes siempre que el codec de audio del video sea reconocido por el reproductor.
 
+### Sobre mi
+---
+Mi nombre el Lucas Febbroni, Soy Ingeniero en Informatica recibido de la Universidad de Palermo.
+Apasionado por la tecnología, la integración de proyectos, Iot y toda clase de desarrollos.
+Soy desarrollador en el Congreso de la Nación Argentina y desarrollo aplicaciones de todo tipo por mi cuenta.
+info@pushuno.com
+www.pushuno.com
 
 
 
