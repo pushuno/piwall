@@ -248,7 +248,9 @@ y el contenido
 pi@192.168.0.100
 pi@192.168.0.101
 
-- copiar el archivo de .ssh/id_rsa.pub a los clientes como .ssh/authorized_keys
+- copiar el archivo de .ssh/id_rsa.pub a los clientes como .ssh/authorized_keys y dar permisos al archivo
+
+sudo chmod 600 /.ssh/authorized_keys
 
 - Controlar los clientes desde el servidor 
 
