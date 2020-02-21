@@ -28,6 +28,7 @@ Realicé varias pruebas y utilizando UDP como vamos a usar se pierden paquetes y
 ante un error crea un log que no da mucha información que ayude a solucionar el problema
 - Para crear un video con Premiere Pro a la mejor resolución y calidad posible y que funcione y fluido hay que tener una configuración específica de codecs.
 - No es posible utilizar pantallas en ángulos no rectos, con esto me refiero a que se pueden colocar las pantallas giradas pero siempre verticales u horizontales. No encontré configuración posible para colocarlas a 45º como era mi idea en un principio, para esto la única alternativa es utilizar un software pago (No son baratos y son por suscripción por lo menos para lo que yo pretendía hacer). Si te interesa esto podés buscar por acá www.info-beamer.com
+- PwOMXPlayer no soporta el comando --loop como si soporta OMXPlayer. 
 
 
 ### Requisitos
@@ -227,6 +228,40 @@ ffmpeg -i 1080.mpg -an -f h264 udp://239.0.1.23:1234
 -i establece el input (nombre del archivo a abrir)
 -f establece el output y formato h264 (para que sea liviano) y salimos por broadcast udp (Esta dirección y puerto es siempre igual)
 -an establece no enviar audio, si lo sacamos envia audio a todos los clientes siempre que el codec de audio del video sea reconocido por el reproductor.
+
+### Control de todos los clientes a la vez
+---
+- Con SSH habilitado e instalando pssh
+
+Sudo apt-get install pssh 
+
+- crear una clave RSA en el servidor
+
+ssh-keygen -t rsa -C "your@emailaddress.com"
+
+- crear un archivo de hosts con los datos de los clientes 
+
+sudo nano /home/pi/wall_hosts
+
+y el contenido
+
+pi@192.168.0.100
+pi@192.168.0.101
+
+- copiar el archivo de .ssh/id_rsa.pub a los clientes como .ssh/authorized_keys
+
+- Controlar los clientes desde el servidor 
+
+pssh -h wall_hosts -t 0 pwomxplayer -A udp://239.0.1.23:1234?buffer_size=1200000B
+
+-h wall_hosts le dice cual es el archivo que contiene la lista de clientes
+-t 0 deshabilita el tiempo maximo de ejecución ya que vamos a reproducir videos
+luego de eso pasamos el comando que queremos ejecutar en todos los clientes. También podría 
+
+pssh -h wall_hosts -t 0 sudo shutdown now
+
+para apagar todos los clientes
+
 
 ### Sobre mi
 ---
