@@ -269,9 +269,7 @@ para apagar todos los clientes
 ---
 Mi nombre el Lucas Febbroni, Soy Ingeniero en Informatica recibido de la Universidad de Palermo.
 Apasionado por la tecnología, la integración de proyectos, Iot y toda clase de desarrollos.
-Soy desarrollador en el Congreso de la Nación Argentina y desarrollo aplicaciones de todo tipo por mi cuenta.
-info@pushuno.com
-www.pushuno.com
+Desarrollo aplicaciones de todo tipo por mi cuenta.
 
 
 
